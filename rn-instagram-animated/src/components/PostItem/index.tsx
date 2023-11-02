@@ -8,12 +8,14 @@ import {
   Name,
   PostImg,
 } from "./styles";
+import LazyLoad from "../LazyLoad";
 
 const PostItem: React.FC<IFeed> = ({
   description,
   image,
   author,
   aspectRatio,
+  small,
 }) => (
   <Container>
     <HeaderPost>
@@ -21,7 +23,7 @@ const PostItem: React.FC<IFeed> = ({
       <Name>{author.name}</Name>
     </HeaderPost>
 
-    <PostImg ratio={aspectRatio} source={{ uri: image }} />
+    <LazyLoad aspectRatio={aspectRatio} image={image} small={small} />
 
     <Description>
       {author.name} {description}

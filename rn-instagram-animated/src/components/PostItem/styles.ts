@@ -22,11 +22,6 @@ export const Name = styled.Text`
   font-weight: bold;
 `;
 
-export const PostImg = styled.Image<{ ratio: number }>`
-  aspect-ratio: ${({ ratio }) => ratio};
-  width: 100%;
-`;
-
 export const Description = styled.Text`
   padding: 15px;
   line-height: 18px;
