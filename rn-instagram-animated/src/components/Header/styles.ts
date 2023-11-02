@@ -8,6 +8,7 @@ export const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   padding: 34px 16px 16px;
+  elevation: 1;
 `;
 
 export const Content = styled.View<{ center?: boolean }>`

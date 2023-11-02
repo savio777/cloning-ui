@@ -14,6 +14,7 @@ const Home: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [changedItems, setChangedItems] = useState<string[]>([]);
 
   const loadPage = async (
     incrementPage = false,
@@ -64,19 +65,32 @@ const Home: React.FC = () => {
     }, [])
   );
 
+  const handleViewableItemsChanged = useCallback(({ changed }) => {
+    setChangedItems(changed.map(({ item }) => item.id));
+  }, []);
+
   return (
     <Container>
       <FlatList
         ref={refFlatlist}
         keyExtractor={(item) => String(item.id)}
         data={posts}
-        renderItem={({ item }) => <PostItem {...item} />}
         onEndReachedThreshold={0.1}
         onEndReached={() => loadPage(true)}
         refreshing={isLoading}
+        onViewableItemsChanged={handleViewableItemsChanged}
+        viewabilityConfig={{
+          viewAreaCoveragePercentThreshold: 20,
+        }}
         refreshControl={
           <RefreshControl refreshing={isLoading} onRefresh={() => loadPage()} />
         }
+        renderItem={({ item }) => (
+          <PostItem
+            data={item}
+            shouldLoadImg={changedItems.includes(item.id)}
+          />
+        )}
         // causando duplicação de index por fazer o onEndReached dar loading sem q o usuário deseja
         // ListFooterComponent={isLoading && <FooterLoading />}
       />
