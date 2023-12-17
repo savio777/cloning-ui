@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className='bg-zinc-900 text-zinc-50'>
         <div className="h-screen flex flex-col">
-          <div className="flex flex-grow max-h-[calc(100vh-73px)]">
+          <div className="flex flex-grow max-h-[calc(100vh-80px)]">
             <SideBar />
 
             {children}
